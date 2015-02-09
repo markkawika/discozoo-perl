@@ -68,9 +68,17 @@ my @a1_boards = ();
 my $empty_board = Board->new();
 my @animals = ();
 
+# No error checking here.
 for my $i (0 .. $#ARGV) {
-  push @animals, $animal{$ARGV[$i]};
+  my $animal_name = $ARGV[$i];
+  if (exists $animal{$animal_name}) {
+    push @animals, $animal{$animal_name};
+  }
+  else {
+    croak "Invalid animal name: [$animal_name]";
+  }
 }
+
 
 my @board_list = ( $empty_board );
 

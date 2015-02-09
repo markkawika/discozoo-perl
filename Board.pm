@@ -89,7 +89,7 @@ sub getNameAtPos {
     croak "Illegal coordinate: ($x,$y)";
   }
 
-  my $id = $self->getIdAtPos();
+  my $id = $self->getIdAtPos($x, $y);
   return $self->getOccupantNameById($id);
 }
 
@@ -130,6 +130,9 @@ sub getNumOccupants {
 
 sub getOccupantNameById {
   my ($self, $id) = @_;
+  if ($id eq q{ }) {
+    return 'empty';
+  }
   if ($id < 0 || $id > $self->getNumOccupants()) {
     croak "No such occupant";
   }
@@ -138,7 +141,6 @@ sub getOccupantNameById {
       return $occ->[1];
     }
   }
-  return 'empty';
 }
 
 sub addOccupant {

@@ -77,6 +77,23 @@ sub getBoardPos {
   return substr($layout->[$y], $x, 1);
 }
 
+sub getIdAtPos {
+  my ($self, $x, $y) = @_;
+  return substr($self->{_layout}->[$y], $x, 1);
+}
+
+sub getNameAtPos {
+  my ($self, $x, $y) = @_;
+
+  if ($x > 4 || $x < 0 || $y > 4 || $y < 0) {
+    croak "Illegal coordinate: ($x,$y)";
+  }
+
+  my $id = $self->getIdAtPos();
+  return $self->getOccupantNameById($id);
+}
+
+
 sub willAnimalFit {
   my ($self, $animal, $x, $y) = @_;
 
@@ -106,6 +123,35 @@ sub willAnimalFit {
   return 1;
 }
 
+sub getNumOccupants {
+  my ($self) = @_;
+  return (scalar @{ $self->{_occupants} });
+}
+
+sub getOccupantNameById {
+  my ($self, $id) = @_;
+  if ($id < 0 || $id > $self->getNumOccupants()) {
+    croak "No such occupant";
+  }
+  for my $occ (@{ $self->{_occupants} }) {
+    if ($occ->[0] == $id) {
+      return $occ->[1];
+    }
+  }
+  return 'empty';
+}
+
+sub addOccupant {
+  my ($self, $animal_name) = @_;
+
+  my @occupants = @{ $self->{_occupants} };
+  my $num_occupants = scalar @occupants;
+  my $animal_id = $num_occupants + 1;
+  push @occupants, [ $animal_id, $animal_name ];
+  $self->{_occupants} = \@occupants;
+  return $animal_id;
+}
+
 sub insertAnimal {
   my ($self, $animal, $x, $y) = @_;
 
@@ -114,11 +160,7 @@ sub insertAnimal {
   }
 
   my $shape = $animal->getShape();
-  my @occupants = @{ $self->{_occupants} };
-  my $num_occupants = scalar @occupants;
-  my $animal_id = $num_occupants + 1;
-  push @occupants, [ $animal_id, $animal->getName() ];
-  $self->{_occupants} = \@occupants;
+  my $animal_id = $self->addOccupant($animal->getName());
 
   for (my $y2 = 0; $y2 < $animal->getHeight(); $y2++) {
     for (my $x2 = 0; $x2 < $animal->getWidth(); $x2++) {

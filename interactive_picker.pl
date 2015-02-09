@@ -129,19 +129,27 @@ for my $animal (@animals) {
 # chance of containing the animal you want.
 
 my @boards_left = @board_list;
+my $num_guesses = 0;
+my $keep_going;
 
 printf "There are %d total boards to eliminate.\n", scalar(@boards_left);
 
 while (@boards_left > 0) { 
+  $num_guesses++;
   my $max_found = 0;
   my $max_x = -1;
   my $max_y = -1;
   for my $y (0 .. 4) {
     for my $x (0 .. 4) {
+      next if $current_board->getBoardPos($x, $y) ne q{ };
       my $num_found = 0;
       for my $board (@boards_left) {
         my $animal_at_pos = $board->getNameAtPos($x, $y);
+        $animal_at_pos =~ tr/A-Z/a-z/;
         if ($animal_at_pos eq $wanted_animal) {
+          $num_found += 10;
+        }
+        elsif ($animal_at_pos ne 'empty') {
           $num_found++;
         }
       }
@@ -179,4 +187,12 @@ while (@boards_left > 0) {
   }
   @boards_left = @boards_temp;
   printf "\nThere are now %d boards remaining.\n", scalar(@boards_left);
+
+  if ($num_guesses == 10) {
+    printf "Out of guesses. Continue? [y/N] ";
+    my $reply = <STDIN>;
+    if ($reply !~ /^y/i) {
+      exit 0;
+    }
+  }
 }

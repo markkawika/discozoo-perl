@@ -161,6 +161,11 @@ while (@boards_left > 0) {
     }
   }
 
+  if ($max_x == -1) {
+    printf "No more board positions to explore.\n";
+    exit 0;
+  }
+
   $current_board->setBoardPos($max_x, $max_y, 'X'); 
   $current_board->printBoard();
   my $result = q{};
@@ -176,6 +181,9 @@ while (@boards_left > 0) {
   
   if ($result ne q{ }) {
     $current_board->setBoardPos($max_x, $max_y, $result);
+  }
+  else {
+    $current_board->setBoardPos($max_x, $max_y, q{-});
   }
 
   my @boards_temp = ();

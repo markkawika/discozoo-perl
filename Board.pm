@@ -175,11 +175,11 @@ sub printBoard {
   my ($self) = @_;
 
   my @layout = @{ $self->getLayout() };
-  print " -----\n";
+  print " -----------\n";
   for my $line (@layout) {
-    print "[$line]\n";
+    print q{[ } . join(q{ }, split(//, $line)) . qq{ ]\n};
   }
-  print " -----\n";
+  print " -----------\n";
   print "\n";
   for my $occupant (@{ $self->{_occupants} }) {
     printf "%1d: %s\n", $occupant->[0], $occupant->[1];

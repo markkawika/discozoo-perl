@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use English qw( -no_match_vars );
 use Carp;
+use Data::Dumper;
 
 use Farm;
 use Outback;
@@ -29,12 +30,12 @@ my $giraffe = Giraffe->new();
 my $lion = Lion->new();
 my $elephant = Elephant->new();
 my $gryphon = Gryphon->new();
-my $bear = Bear->new();
-my $skunk = Skunk->new();
-my $beaver = Beaver->new();
-my $moosey = Moosey->new();
-my $fox = Fox->new();
-my $sasquatch = Sasquatch->new();
+my $bear      = $Northern::bear;
+my $skunk     = $Northern::skunk;
+my $beaver    = $Northern::beaver;
+my $moosey    = $Northern::moosey;
+my $fox       = $Northern::fox;
+my $sasquatch = $Northern::sasquatch;
 
 my %animal = (
   pig       => $pig,

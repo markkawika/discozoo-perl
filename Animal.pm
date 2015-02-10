@@ -11,13 +11,26 @@ use Carp;
 # easily with a string compare.
 
 sub new {
-  my ($class, $name) = @_;
+  my ($class, $name, $shape) = @_;
+
+  my $width;
+  my $height;
+
+  if (! defined $shape) {
+    $shape = [];
+    $width = 0;
+    $height = 0;
+  }
+  else {
+    $width = length($shape->[0]);
+    $height = scalar @{ $shape };
+  }
 
   my $self = {
-    _width  => 1,
-    _height => 1,
+    _width  => $width,
+    _height => $height,
     _name   => $name,
-    _shape  => [],
+    _shape  => $shape,
   };
   bless $self, $class;
   return $self;

@@ -2,6 +2,8 @@
 
 package Northern;
 
+use Animal;
+
 my $bear_shape = [
   q{XX},
   q{ X},
@@ -34,11 +36,11 @@ my $sasquatch_shape = [
   q{X},
 ];
 
-our $bear      = Animal->new('bear', $bear_shape, 2, 3);
-our $skunk     = Animal->new('skunk', $skunk_shape, 3, 2);
-our $beaver    = Animal->new('beaver', $beaver_shape, 3, 3);
-our $moosey    = Animal->new('moosey', $moosey_shape, 3, 2);
-our $fox       = Animal->new('fox', $fox_shape, 3, 2);
-our $sasquatch = Animal->new('sasquatch', $sasquatch_shape, 1, 2);
+our $bear      = Animal->new('bear',      $bear_shape);
+our $skunk     = Animal->new('skunk',     $skunk_shape);
+our $beaver    = Animal->new('beaver',    $beaver_shape);
+our $moosey    = Animal->new('moosey',    $moosey_shape);
+our $fox       = Animal->new('fox',       $fox_shape);
+our $sasquatch = Animal->new('sasquatch', $sasquatch_shape);
 
 1;

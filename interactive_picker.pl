@@ -6,30 +6,33 @@ use English qw( -no_match_vars );
 use Carp;
 use Data::Dumper;
 
+use Board;
 use Farm;
 use Outback;
 use Savanna;
 use Northern;
-use Board;
 
-my $pig = Pig->new();
-my $sheep = Sheep->new();
-my $horse = Horse->new();
-my $rabbit = Rabbit->new();
-my $cow = Cow->new();
-my $unicorn = Unicorn->new();
-my $kangaroo = Kangaroo->new();
-my $platypus = Platypus->new();
-my $crocodile = Crocodile->new();
-my $koala = Koala->new();
-my $cockatoo = Cockatoo->new();
-my $tiddalik = Tiddalik->new();
-my $zebra = Zebra->new();
-my $hippo = Hippo->new();
-my $giraffe = Giraffe->new();
-my $lion = Lion->new();
-my $elephant = Elephant->new();
-my $gryphon = Gryphon->new();
+my $pig     = $Farm::pig;
+my $sheep   = $Farm::sheep;
+my $horse   = $Farm::horse;
+my $rabbit  = $Farm::rabbit;
+my $cow     = $Farm::cow;
+my $unicorn = $Farm::unicorn;
+
+my $kangaroo  = $Outback::kangaroo;
+my $platypus  = $Outback::platypus;
+my $crocodile = $Outback::crocodile;
+my $koala     = $Outback::koala;
+my $cockatoo  = $Outback::cockatoo;
+my $tiddalik  = $Outback::tiddalik;
+
+my $zebra    = $Savanna::zebra;
+my $hippo    = $Savanna::hippo;
+my $giraffe  = $Savanna::giraffe;
+my $lion     = $Savanna::lion;
+my $elephant = $Savanna::elephant;
+my $gryphon  = $Savanna::gryphon;
+
 my $bear      = $Northern::bear;
 my $skunk     = $Northern::skunk;
 my $beaver    = $Northern::beaver;

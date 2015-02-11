@@ -11,6 +11,7 @@ use Farm;
 use Outback;
 use Savanna;
 use Northern;
+use Polar;
 
 my $pig     = $Farm::pig;
 my $sheep   = $Farm::sheep;
@@ -40,31 +41,44 @@ my $moosey    = $Northern::moosey;
 my $fox       = $Northern::fox;
 my $sasquatch = $Northern::sasquatch;
 
+my $seal       = $Polar::seal;
+my $polar_bear = $Polar::polar_bear;
+my $muskox     = $Polar::muskox;
+my $walrus     = $Polar::walrus;
+my $penguin    = $Polar::penguin;
+my $yeti       = $Polar::yeti;
+
 my %animal = (
-  pig       => $pig,
-  sheep     => $sheep,
-  horse     => $horse,
-  rabbit    => $rabbit,
-  cow       => $cow,
-  unicorn   => $unicorn,
-  kangaroo  => $kangaroo,
-  platypus  => $platypus,
-  crocodile => $crocodile,
-  koala     => $koala,
-  cockatoo  => $cockatoo,
-  tiddalik  => $tiddalik,
-  zebra     => $zebra,
-  hippo     => $hippo,
-  giraffe   => $giraffe,
-  lion      => $lion,
-  elephant  => $elephant,
-  gryphon   => $gryphon,
-  bear      => $bear,
-  skunk     => $skunk,
-  beaver    => $beaver,
-  moosey    => $moosey,
-  fox       => $fox,
-  sasquatch => $sasquatch,
+  pig        => $pig,
+  sheep      => $sheep,
+  horse      => $horse,
+  rabbit     => $rabbit,
+  cow        => $cow,
+  unicorn    => $unicorn,
+  kangaroo   => $kangaroo,
+  platypus   => $platypus,
+  crocodile  => $crocodile,
+  koala      => $koala,
+  cockatoo   => $cockatoo,
+  tiddalik   => $tiddalik,
+  zebra      => $zebra,
+  hippo      => $hippo,
+  giraffe    => $giraffe,
+  lion       => $lion,
+  elephant   => $elephant,
+  gryphon    => $gryphon,
+  bear       => $bear,
+  skunk      => $skunk,
+  beaver     => $beaver,
+  moosey     => $moosey,
+  fox        => $fox,
+  sasquatch  => $sasquatch,
+  seal       => $seal,
+  polar_bear => $polar_bear,
+  muskox     => $muskox,
+  walrus     => $walrus,
+  penguin    => $penguin,
+  yeti       => $yeti,
 );
 
 

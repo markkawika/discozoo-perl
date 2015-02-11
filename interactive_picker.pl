@@ -159,9 +159,6 @@ while (@boards_left > 0) {
         if (exists $animal_score{$animal_at_pos}) {
           $cur_score += $animal_score{$animal_at_pos};
         }
-        else {
-          croak "Found an animal [${animal_at_pos}] that isn't on our board";
-        }
       }
       if ($cur_score > $max_score) {
         $max_score = $cur_score;

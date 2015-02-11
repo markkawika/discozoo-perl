@@ -41,11 +41,11 @@ my $moosey    = $Northern::moosey;
 my $fox       = $Northern::fox;
 my $sasquatch = $Northern::sasquatch;
 
-my $seal       = $Polar::seal;
-my $polar_bear = $Polar::polar_bear;
-my $muskox     = $Polar::muskox;
-my $walrus     = $Polar::walrus;
 my $penguin    = $Polar::penguin;
+my $seal       = $Polar::seal;
+my $muskox     = $Polar::muskox;
+my $polar_bear = $Polar::polar_bear;
+my $walrus     = $Polar::walrus;
 my $yeti       = $Polar::yeti;
 
 my %animal = (
@@ -73,11 +73,11 @@ my %animal = (
   moosey     => $moosey,
   fox        => $fox,
   sasquatch  => $sasquatch,
-  seal       => $seal,
-  polar_bear => $polar_bear,
-  muskox     => $muskox,
-  walrus     => $walrus,
   penguin    => $penguin,
+  seal       => $seal,
+  muskox     => $muskox,
+  polar_bear => $polar_bear,
+  walrus     => $walrus,
   yeti       => $yeti,
 );
 

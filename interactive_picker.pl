@@ -37,7 +37,7 @@ my $gryphon  = $Savanna::gryphon;
 my $bear      = $Northern::bear;
 my $skunk     = $Northern::skunk;
 my $beaver    = $Northern::beaver;
-my $moosey    = $Northern::moosey;
+my $moose     = $Northern::moose;
 my $fox       = $Northern::fox;
 my $sasquatch = $Northern::sasquatch;
 
@@ -70,7 +70,7 @@ my %animal = (
   bear       => $bear,
   skunk      => $skunk,
   beaver     => $beaver,
-  moosey     => $moosey,
+  moose      => $moose,
   fox        => $fox,
   sasquatch  => $sasquatch,
   penguin    => $penguin,

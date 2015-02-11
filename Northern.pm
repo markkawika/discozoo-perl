@@ -21,7 +21,7 @@ my $beaver_shape = [
   q{  X},
 ];
 
-my $moosey_shape = [
+my $moose_shape = [
   q{X X},
   q{ X },
 ];
@@ -39,7 +39,7 @@ my $sasquatch_shape = [
 our $bear      = Animal->new('bear',      $bear_shape);
 our $skunk     = Animal->new('skunk',     $skunk_shape);
 our $beaver    = Animal->new('beaver',    $beaver_shape);
-our $moosey    = Animal->new('moosey',    $moosey_shape);
+our $moose     = Animal->new('moose',     $moose_shape);
 our $fox       = Animal->new('fox',       $fox_shape);
 our $sasquatch = Animal->new('sasquatch', $sasquatch_shape);
 

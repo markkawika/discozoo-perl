@@ -82,7 +82,6 @@ my %animal = (
 );
 
 
-my @a1_boards = ();
 my $empty_board = Board->new();
 my @animals = ();
 
@@ -90,13 +89,15 @@ my @animals = ();
 my $wanted_animal = $ARGV[0];
 
 my $current_board = Board->new();
-my $num_animals = 0;
+my $num_animals = 0; # For statistics
+my $id_string = q{};
 
 for my $i (0 .. $#ARGV) {
   my $animal_name = $ARGV[$i];
   if (exists $animal{$animal_name}) {
     push @animals, $animal{$animal_name};
     $num_animals = $current_board->addOccupant($animal_name);
+    $id_string .= $num_animals;
   }
   else {
     croak "Invalid animal name: [$animal_name]";
@@ -105,74 +106,59 @@ for my $i (0 .. $#ARGV) {
 
 
 # Initialize the loop with the empty state:
-my @board_list = ( $empty_board );
+my @boards_left = ( $empty_board );
 
 for my $animal (@animals) {
-  my @new_board_list = ();
-  for my $board (@board_list) {
+  my @new_boards = ();
+  for my $board (@boards_left) {
     for my $y (0 .. 4) {
       for my $x (0 .. 4) {
         if ($board->willAnimalFit($animal, $x, $y)) {
           my $new_board = $board->clone();
           $new_board->insertAnimal($animal, $x, $y);
-          push @new_board_list, $new_board;
+          push @new_boards, $new_board;
         }
       }
     }
   }
-  @board_list = @new_board_list;
+  @boards_left = @new_boards;
 }
 
-# At this point, @board_list contains a list of every single possible board
+# At this point, @boards_left contains a list of every single possible board
 # configuration at the start of the game.
 
-# Now, find a winning search strategy. My intuition is to always pick a square
-# that will maximize the information returned on a miss. In other words,
-# reveal a square that, if empty, removes the max number of possibilities.
-# The easiest way to show this idea is with pigs. If I reveal (1,1), I
-# eliminate four possible pig positions:
-#
-# PP... .PP.. ..... .....
-# PP... .PP.. PP... .PP..
-# ..... ..... PP... .PP..
-# ..... ..... ..... .....
-# ..... ..... ..... .....
-#
-# This is a better choice than (0,0), which will only eliminate one.
-# If you run this strategy on all possible boards will all possible
-# combinations of N animals, you find the winning search strategy for those
-# two animals.
-#
-# Another way to think of this is to pick a square with the highest possible
-# chance of containing the animal you want.
+# My search strategy: pick a square with the highest possible chance of
+# containing the animal you want.
 
-my @boards_left = @board_list;
 my $num_guesses = 0;
-my $keep_going;
 
 printf "There are %d total boards to eliminate.\n", scalar(@boards_left);
 
 while (@boards_left > 0) { 
   $num_guesses++;
-  my $max_found = 0;
+  my $max_score = 0;
+
+  # First, identify which spot on the board has the highest chance of
+  # containing either the animal we want, or barring that (if we've already
+  # found the animal we want, for example), any animal.
   my $max_x = -1;
   my $max_y = -1;
   for my $y (0 .. 4) {
     for my $x (0 .. 4) {
       next if $current_board->getBoardPos($x, $y) ne q{ };
-      my $num_found = 0;
+      my $cur_score = 0;
       for my $board (@boards_left) {
         my $animal_at_pos = $board->getNameAtPos($x, $y);
-        $animal_at_pos =~ tr/A-Z/a-z/;
         if ($animal_at_pos eq $wanted_animal) {
-          $num_found += 10;
+          # 10 instead of 1 is a hack to prioritize an animal.
+          $cur_score += 10;
         }
         elsif ($animal_at_pos ne 'empty') {
-          $num_found++;
+          $cur_score++;
         }
       }
-      if ($num_found > $max_found) {
-        $max_found = $num_found;
+      if ($cur_score > $max_score) {
+        $max_score = $cur_score;
         $max_x = $x;
         $max_y = $y;
       }
@@ -180,12 +166,17 @@ while (@boards_left > 0) {
   }
 
   if ($max_x == -1) {
-    printf "No more board positions to explore.\n";
+    printf "\nYou've found every animal. Congratulations! Final board:\n\n";
+    $current_board->printBoard();
+    print "\n";
     exit 0;
   }
 
+  # 'X' marks the spot we want the user to reveal.
   $current_board->setBoardPos($max_x, $max_y, 'X'); 
   $current_board->printBoard();
+
+  # Calculate statistics about what might be there
   my $wanted_count = 0;
   my $animal_count = 0;
   my $empty_count = 0;
@@ -201,16 +192,14 @@ while (@boards_left > 0) {
       $empty_count++;
     }
   }
+  print "\n";
   printf "Chance for wanted: %.1f%%\n", 100.0 * ($wanted_count / @boards_left);
   printf "Chance for animal: %.1f%%\n", 100.0 * ($animal_count / @boards_left);
   printf "Chance for empty:  %.1f%%\n", 100.0 * ($empty_count / @boards_left);
+
   my $result = q{};
-  while ($result !~ /^[ \d]/) {
-    printf "\nResult: [ ";
-    for (my $i = 0; $i < $num_animals; $i++) {
-      printf $i+1;
-    }
-    printf "]: ";
+  while ($result !~ /^[ \d]$/) {
+    printf "\nResult: [ ${id_string}]: ";
     $result = <STDIN>;
     chomp $result;
   }

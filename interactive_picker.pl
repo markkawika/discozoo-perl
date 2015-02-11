@@ -186,6 +186,24 @@ while (@boards_left > 0) {
 
   $current_board->setBoardPos($max_x, $max_y, 'X'); 
   $current_board->printBoard();
+  my $wanted_count = 0;
+  my $animal_count = 0;
+  my $empty_count = 0;
+  for my $board (@boards_left) {
+    my $name = $board->getNameAtPos($max_x, $max_y);
+    if ($name eq $wanted_animal) {
+      $wanted_count++;
+    }
+    elsif ($name ne 'empty') {
+      $animal_count++;
+    }
+    else {
+      $empty_count++;
+    }
+  }
+  printf "Chance for wanted: %.1f%%\n", 100.0 * ($wanted_count / @boards_left);
+  printf "Chance for animal: %.1f%%\n", 100.0 * ($animal_count / @boards_left);
+  printf "Chance for empty:  %.1f%%\n", 100.0 * ($empty_count / @boards_left);
   my $result = q{};
   while ($result !~ /^[ \d]/) {
     printf "\nResult: [ ";

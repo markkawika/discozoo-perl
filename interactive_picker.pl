@@ -165,6 +165,15 @@ while (@boards_left > 0) {
         $max_x = $x;
         $max_y = $y;
       }
+      elsif ($cur_score == $max_score && $cur_score > 0) {
+        # Switch coordinates half of the time we find a matching score. This
+        # will have the effect of making the animal discovery a little more
+        # random-appearing, without actually affecting the outcome.
+        if (rand >= 0.5) {
+          $max_x = $x;
+          $max_y = $y;
+        }
+      }
     }
   }
 

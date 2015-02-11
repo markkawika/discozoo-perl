@@ -227,9 +227,13 @@ while (@boards_left > 0) {
   }
 
   if ($num_guesses == 10) {
-    printf "Out of guesses. Continue? [y/N] ";
+    printf "\nOut of guesses. Continue? [y/N] ";
     my $reply = <STDIN>;
+    chomp $reply;
     if ($reply !~ /^y/i) {
+      print "\nFinal board:\n\n";
+      $current_board->printBoard();
+      print "\n";
       exit 0;
     }
   }

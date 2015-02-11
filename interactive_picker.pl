@@ -82,6 +82,8 @@ my %animal = (
 );
 
 
+croak 'No animals listed!' if @ARGV == 0;
+
 my $empty_board = Board->new();
 my @animals = ();
 
@@ -91,6 +93,7 @@ my $wanted_animal = $ARGV[0];
 my $current_board = Board->new();
 my $num_animals = 0; # For statistics
 my $id_string = q{};
+my %animal_score = ();
 
 for my $i (0 .. $#ARGV) {
   my $animal_name = $ARGV[$i];
@@ -98,6 +101,10 @@ for my $i (0 .. $#ARGV) {
     push @animals, $animal{$animal_name};
     $num_animals = $current_board->addOccupant($animal_name);
     $id_string .= $num_animals;
+    for my $animal_key (keys %animal_score) {
+      $animal_score{$animal_key} *= 10;
+    }
+    $animal_score{$animal_name} = 1;
   }
   else {
     croak "Invalid animal name: [$animal_name]";
@@ -149,12 +156,11 @@ while (@boards_left > 0) {
       my $cur_score = 0;
       for my $board (@boards_left) {
         my $animal_at_pos = $board->getNameAtPos($x, $y);
-        if ($animal_at_pos eq $wanted_animal) {
-          # 10 instead of 1 is a hack to prioritize an animal.
-          $cur_score += 10;
+        if (exists $animal_score{$animal_at_pos}) {
+          $cur_score += $animal_score{$animal_at_pos};
         }
-        elsif ($animal_at_pos ne 'empty') {
-          $cur_score++;
+        else {
+          croak "Found an animal [${animal_at_pos}] that isn't on our board";
         }
       }
       if ($cur_score > $max_score) {

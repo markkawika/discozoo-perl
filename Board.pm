@@ -177,7 +177,7 @@ sub printBoard {
   my @layout = @{ $self->getLayout() };
   print " -----------\n";
   for my $line (@layout) {
-    print q{[ } . join(q{ }, split(//, $line)) . qq{ ]\n};
+    print q{| } . join(q{ }, split(//, $line)) . qq{ |\n};
   }
   print " -----------\n";
   print "\n";

@@ -212,7 +212,12 @@ while (@boards_left > 0) {
     }
   }
   @boards_left = @boards_temp;
-  printf "\nThere are now %d boards remaining.\n", scalar(@boards_left);
+  if (scalar @boards_left == 1) {
+    print "\nThere is now 1 board remaining.\n";
+  }
+  else {
+    printf "\nThere are now %d boards remaining.\n", scalar(@boards_left);
+  }
 
   if ($num_guesses == 10) {
     printf "Out of guesses. Continue? [y/N] ";

@@ -12,6 +12,7 @@ use Outback;
 use Savanna;
 use Northern;
 use Polar;
+use Moon;
 
 my $pig     = $Farm::pig;
 my $sheep   = $Farm::sheep;
@@ -48,37 +49,50 @@ my $polar_bear = $Polar::polar_bear;
 my $walrus     = $Polar::walrus;
 my $yeti       = $Polar::yeti;
 
+my $moonkey     = $Moon::moonkey;
+my $lunar_tick  = $Moon::lunar_tick;
+my $tribble     = $Moon::tribble;
+my $moonicorn   = $Moon::moonicorn,
+my $luna_moth   = $Moon::luna_moth;
+my $jade_rabbit = $Moon::jade_rabbit;
+
 my %animal = (
-  pig        => $pig,
-  sheep      => $sheep,
-  horse      => $horse,
-  rabbit     => $rabbit,
-  cow        => $cow,
-  unicorn    => $unicorn,
-  kangaroo   => $kangaroo,
-  platypus   => $platypus,
-  crocodile  => $crocodile,
-  koala      => $koala,
-  cockatoo   => $cockatoo,
-  tiddalik   => $tiddalik,
-  zebra      => $zebra,
-  hippo      => $hippo,
-  giraffe    => $giraffe,
-  lion       => $lion,
-  elephant   => $elephant,
-  gryphon    => $gryphon,
-  bear       => $bear,
-  skunk      => $skunk,
-  beaver     => $beaver,
-  moose      => $moose,
-  fox        => $fox,
-  sasquatch  => $sasquatch,
-  penguin    => $penguin,
-  seal       => $seal,
-  muskox     => $muskox,
-  polar_bear => $polar_bear,
-  walrus     => $walrus,
-  yeti       => $yeti,
+  pig         => $pig,
+  sheep       => $sheep,
+  horse       => $horse,
+  rabbit      => $rabbit,
+  cow         => $cow,
+  unicorn     => $unicorn,
+  kangaroo    => $kangaroo,
+  platypus    => $platypus,
+  crocodile   => $crocodile,
+  koala       => $koala,
+  cockatoo    => $cockatoo,
+  tiddalik    => $tiddalik,
+  zebra       => $zebra,
+  hippo       => $hippo,
+  giraffe     => $giraffe,
+  lion        => $lion,
+  elephant    => $elephant,
+  gryphon     => $gryphon,
+  bear        => $bear,
+  skunk       => $skunk,
+  beaver      => $beaver,
+  moose       => $moose,
+  fox         => $fox,
+  sasquatch   => $sasquatch,
+  penguin     => $penguin,
+  seal        => $seal,
+  muskox      => $muskox,
+  polar_bear  => $polar_bear,
+  walrus      => $walrus,
+  yeti        => $yeti,
+  moonkey     => $moonkey,
+  lunar_tick  => $lunar_tick,
+  tribble     => $tribble,
+  moonicorn   => $moonicorn,
+  luna_moth   => $luna_moth,
+  jade_rabbit => $jade_rabbit,
 );
 
 

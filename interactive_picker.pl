@@ -13,6 +13,7 @@ use Savanna;
 use Northern;
 use Polar;
 use Moon;
+use Jungle;
 
 my $pig     = $Farm::pig;
 my $sheep   = $Farm::sheep;
@@ -56,6 +57,13 @@ my $moonicorn   = $Moon::moonicorn,
 my $luna_moth   = $Moon::luna_moth;
 my $jade_rabbit = $Moon::jade_rabbit;
 
+my $monkey  = $Jungle::monkey;
+my $toucan  = $Jungle::toucan;
+my $gorilla = $Jungle::gorilla;
+my $panda   = $Jungle::panda;
+my $tiger   = $Jungle::tiger;
+my $phoenix = $Jungle::phoenix;
+
 my %animal = (
   pig         => $pig,
   sheep       => $sheep,
@@ -93,6 +101,12 @@ my %animal = (
   moonicorn   => $moonicorn,
   luna_moth   => $luna_moth,
   jade_rabbit => $jade_rabbit,
+  monkey      => $monkey,
+  toucan      => $toucan,
+  gorilla     => $gorilla,
+  panda       => $panda,
+  tiger       => $tiger,
+  phoenix     => $phoenix,
 );
 
 

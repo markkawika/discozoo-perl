@@ -20,25 +20,26 @@ use Mountain;
 use Moon;
 use Mars;
 
+my @animal_list = ();
+
+push @animal_list, @Farm::animals;
+push @animal_list, @Outback::animals;
+push @animal_list, @Savanna::animals;
+push @animal_list, @Northern::animals;
+push @animal_list, @Polar::animals;
+push @animal_list, @Jungle::animals;
+push @animal_list, @Jurassic::animals;
+push @animal_list, @Ice_Age::animals;
+push @animal_list, @City::animals;
+push @animal_list, @Mountain::animals;
+push @animal_list, @Moon::animals;
+push @animal_list, @Mars::animals;
+
 my %animal = ();
 
-for my $animal_data (
-  @Farm::animals,
-  @Outback::animals,
-  @Savanna::animals,
-  @Northern::animals,
-  @Polar::animals,
-  @Jungle::animals,
-  @Jurassic::animals,
-  @Ice_Age::animals,
-  @City::animals,
-  @Mountain::animals,
-  @Moon::animals,
-  @Mars::animals,
-) {
+for my $animal_data (@animal_list) {
   $animal{$animal_data->[0]} = $animal_data->[1];
 }
-
 
 croak 'No animals listed!' if @ARGV == 0;
 
@@ -52,9 +53,15 @@ my $current_board = Board->new();
 my $num_animals = 0; # For statistics
 my $id_string = q{};
 my %animal_score = ();
+$animal_score{empty} = 0;
+my %animal_count = ();
+$animal_count{empty} = 0;
+my $max_name_len = 0;
 
 for my $i (0 .. $#ARGV) {
   my $animal_name = $ARGV[$i];
+  my $name_len = length $animal_name;
+  $max_name_len = ($name_len > $max_name_len) ? $name_len : $max_name_len;
   if (exists $animal{$animal_name}) {
     push @animals, $animal{$animal_name};
     $num_animals = $current_board->addOccupant($animal_name);
@@ -63,11 +70,14 @@ for my $i (0 .. $#ARGV) {
       $animal_score{$animal_key} *= 10;
     }
     $animal_score{$animal_name} = 1;
+    $animal_count{$animal_name} = 0;
   }
   else {
     croak "Invalid animal name: [$animal_name]";
   }
 }
+
+$max_name_len++; # make room for the colon
 
 
 # Initialize the loop with the empty state:
@@ -127,7 +137,7 @@ while (@boards_left > 0) {
         # Switch coordinates half of the time we find a matching score. This
         # will have the effect of making the animal discovery a little more
         # random-appearing, without actually affecting the outcome.
-        if (rand >= 0.5) {
+        if (rand >= 0.2) {
           $max_x = $x;
           $max_y = $y;
         }
@@ -146,26 +156,31 @@ while (@boards_left > 0) {
   $current_board->setBoardPos($max_x, $max_y, 'X'); 
   $current_board->printBoard();
 
-  # Calculate statistics about what might be there
-  my $wanted_count = 0;
-  my $animal_count = 0;
-  my $empty_count = 0;
+  # Calculate statistics about all possibilities.
+  for my $animal_name (keys %animal_count) {
+    $animal_count{$animal_name} = 0;
+  }
   for my $board (@boards_left) {
-    my $name = $board->getNameAtPos($max_x, $max_y);
-    if ($name eq $wanted_animal) {
-      $wanted_count++;
-    }
-    elsif ($name ne 'empty') {
-      $animal_count++;
+    my $name_at_pos = $board->getNameAtPos($max_x, $max_y);
+    if (exists $animal_count{$name_at_pos}) {
+      $animal_count{$name_at_pos}++;
     }
     else {
-      $empty_count++;
+      croak 'Name at pos [$name_at_pos] not found in animal_count';
     }
   }
+
   print "\n";
-  printf "Chance for wanted: %.1f%%\n", 100.0 * ($wanted_count / @boards_left);
-  printf "Chance for animal: %.1f%%\n", 100.0 * ($animal_count / @boards_left);
-  printf "Chance for empty:  %.1f%%\n", 100.0 * ($empty_count / @boards_left);
+  for my $animal_name (
+    reverse
+      sort
+        { $animal_score{$a} <=> $animal_score{$b} }
+        keys %animal_count
+  ) {
+    printf "Chance for %-${max_name_len}s %.1f%%\n",
+      "${animal_name}:",
+      (100.0 * $animal_count{$animal_name}) / @boards_left;
+  }
 
   my $result = q{};
   while ($result !~ /^[ \d]$/) {

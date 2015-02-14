@@ -77,8 +77,6 @@ for my $i (0 .. $#ARGV) {
   }
 }
 
-$max_name_len++; # make room for the colon
-
 
 # Initialize the loop with the empty state:
 my @boards_left = ( $empty_board );
@@ -177,10 +175,11 @@ while (@boards_left > 0) {
         { $animal_score{$a} <=> $animal_score{$b} }
         keys %animal_count
   ) {
-    printf "Chance for %-${max_name_len}s %.1f%%\n",
-      "${animal_name}:",
+    printf "[%${max_name_len}s:%.1f%%] ",
+      ${animal_name},
       (100.0 * $animal_count{$animal_name}) / @boards_left;
   }
+  print "\n";
 
   my $result = q{};
   while ($result !~ /^[ \d]$/) {

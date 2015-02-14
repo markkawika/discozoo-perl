@@ -44,4 +44,13 @@ our $lion     = Animal->new('lion',     $lion_shape);
 our $elephant = Animal->new('elephant', $elephant_shape);
 our $gryphon  = Animal->new('gryphon',  $gryphon_shape);
 
+our @animals = (
+  [ 'zebra',    $zebra    ],
+  [ 'hippo',    $hippo    ],
+  [ 'giraffe',  $giraffe  ],
+  [ 'lion',     $lion     ],
+  [ 'elephant', $elephant ],
+  [ 'gryphon',  $gryphon  ],
+);
+
 1;

@@ -43,4 +43,13 @@ our $koala     = Animal->new('koala',     $koala_shape);
 our $cockatoo  = Animal->new('cockatoo',  $cockatoo_shape);
 our $tiddalik  = Animal->new('tiddalik',  $tiddalik_shape);
 
+our @animals = (
+  [ 'kangaroo',  $kangaroo  ],
+  [ 'platypus',  $platypus  ],
+  [ 'crocodile', $crocodile ],
+  [ 'koala',     $koala     ],
+  [ 'cockatoo',  $cockatoo  ],
+  [ 'tiddalik',  $tiddalik  ],
+);
+
 1;

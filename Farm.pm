@@ -42,4 +42,13 @@ our $horse   = Animal->new('horse',   $horse_shape);
 our $cow     = Animal->new('cow',     $cow_shape);
 our $unicorn = Animal->new('unicorn', $unicorn_shape);
 
+our @animals = (
+  [ 'sheep',   $sheep   ],
+  [ 'pig',     $pig     ],
+  [ 'rabbit',  $rabbit  ],
+  [ 'horse',   $horse   ],
+  [ 'cow',     $cow     ],
+  [ 'unicorn', $unicorn ],
+);
+
 1;

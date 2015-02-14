@@ -44,4 +44,13 @@ our $polar_bear = Animal->new('polar_bear', $polar_bear_shape);
 our $walrus     = Animal->new('walrus',     $walrus_shape);
 our $yeti       = Animal->new('yeti',       $yeti_shape);
 
+our @animals = (
+  [ 'penguin',    $penguin    ],
+  [ 'seal',       $seal       ],
+  [ 'muskox',     $muskox     ],
+  [ 'polar_bear', $polar_bear ],
+  [ 'walrus',     $walrus     ],
+  [ 'yeti',       $yeti       ],
+);
+
 1;

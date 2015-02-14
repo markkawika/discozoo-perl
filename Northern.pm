@@ -43,4 +43,13 @@ our $moose     = Animal->new('moose',     $moose_shape);
 our $fox       = Animal->new('fox',       $fox_shape);
 our $sasquatch = Animal->new('sasquatch', $sasquatch_shape);
 
+our @animals = (
+  [ 'bear',      $bear      ],
+  [ 'skunk',     $skunk     ],
+  [ 'beaver',    $beaver    ],
+  [ 'moose',     $moose     ],
+  [ 'fox',       $fox       ],
+  [ 'sasquatch', $sasquatch ],
+);
+
 1;

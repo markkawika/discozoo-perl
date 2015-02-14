@@ -46,4 +46,13 @@ our $moonicorn   = Animal->new('moonicorn',   $moonicorn_shape);
 our $luna_moth   = Animal->new('luna_moth',   $luna_moth_shape);
 our $jade_rabbit = Animal->new('jade_rabbit', $jade_rabbit_shape);
 
+our @animals = (
+  [ 'moonkey',     $moonkey     ],
+  [ 'lunar_tick',  $lunar_tick  ],
+  [ 'tribble',     $tribble     ],
+  [ 'moonicorn',   $moonicorn   ],
+  [ 'luna_moth',   $luna_moth   ],
+  [ 'jade_rabbit', $jade_rabbit ],
+);
+
 1;

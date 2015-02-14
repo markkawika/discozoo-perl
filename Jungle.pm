@@ -44,4 +44,13 @@ our $panda   = Animal->new('panda',   $panda_shape);
 our $tiger   = Animal->new('tiger',   $tiger_shape);
 our $phoenix = Animal->new('phoenix', $phoenix_shape);
 
+our @animals = (
+  [ 'monkey',  $monkey  ],
+  [ 'toucan',  $toucan  ],
+  [ 'gorilla', $gorilla ],
+  [ 'panda',   $panda   ],
+  [ 'tiger',   $tiger   ],
+  [ 'phoenix', $phoenix ],
+);
+
 1;

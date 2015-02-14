@@ -12,102 +12,32 @@ use Outback;
 use Savanna;
 use Northern;
 use Polar;
-use Moon;
 use Jungle;
+use Jurassic;
+use Ice_Age;
+use City;
+use Mountain;
+use Moon;
+use Mars;
 
-my $pig     = $Farm::pig;
-my $sheep   = $Farm::sheep;
-my $horse   = $Farm::horse;
-my $rabbit  = $Farm::rabbit;
-my $cow     = $Farm::cow;
-my $unicorn = $Farm::unicorn;
+my %animal = ();
 
-my $kangaroo  = $Outback::kangaroo;
-my $platypus  = $Outback::platypus;
-my $crocodile = $Outback::crocodile;
-my $koala     = $Outback::koala;
-my $cockatoo  = $Outback::cockatoo;
-my $tiddalik  = $Outback::tiddalik;
-
-my $zebra    = $Savanna::zebra;
-my $hippo    = $Savanna::hippo;
-my $giraffe  = $Savanna::giraffe;
-my $lion     = $Savanna::lion;
-my $elephant = $Savanna::elephant;
-my $gryphon  = $Savanna::gryphon;
-
-my $bear      = $Northern::bear;
-my $skunk     = $Northern::skunk;
-my $beaver    = $Northern::beaver;
-my $moose     = $Northern::moose;
-my $fox       = $Northern::fox;
-my $sasquatch = $Northern::sasquatch;
-
-my $penguin    = $Polar::penguin;
-my $seal       = $Polar::seal;
-my $muskox     = $Polar::muskox;
-my $polar_bear = $Polar::polar_bear;
-my $walrus     = $Polar::walrus;
-my $yeti       = $Polar::yeti;
-
-my $moonkey     = $Moon::moonkey;
-my $lunar_tick  = $Moon::lunar_tick;
-my $tribble     = $Moon::tribble;
-my $moonicorn   = $Moon::moonicorn,
-my $luna_moth   = $Moon::luna_moth;
-my $jade_rabbit = $Moon::jade_rabbit;
-
-my $monkey  = $Jungle::monkey;
-my $toucan  = $Jungle::toucan;
-my $gorilla = $Jungle::gorilla;
-my $panda   = $Jungle::panda;
-my $tiger   = $Jungle::tiger;
-my $phoenix = $Jungle::phoenix;
-
-my %animal = (
-  pig         => $pig,
-  sheep       => $sheep,
-  horse       => $horse,
-  rabbit      => $rabbit,
-  cow         => $cow,
-  unicorn     => $unicorn,
-  kangaroo    => $kangaroo,
-  platypus    => $platypus,
-  crocodile   => $crocodile,
-  koala       => $koala,
-  cockatoo    => $cockatoo,
-  tiddalik    => $tiddalik,
-  zebra       => $zebra,
-  hippo       => $hippo,
-  giraffe     => $giraffe,
-  lion        => $lion,
-  elephant    => $elephant,
-  gryphon     => $gryphon,
-  bear        => $bear,
-  skunk       => $skunk,
-  beaver      => $beaver,
-  moose       => $moose,
-  fox         => $fox,
-  sasquatch   => $sasquatch,
-  penguin     => $penguin,
-  seal        => $seal,
-  muskox      => $muskox,
-  polar_bear  => $polar_bear,
-  walrus      => $walrus,
-  yeti        => $yeti,
-  moonkey     => $moonkey,
-  lunar_tick  => $lunar_tick,
-  tribble     => $tribble,
-  moonicorn   => $moonicorn,
-  luna_moth   => $luna_moth,
-  jade_rabbit => $jade_rabbit,
-  monkey      => $monkey,
-  toucan      => $toucan,
-  gorilla     => $gorilla,
-  panda       => $panda,
-  tiger       => $tiger,
-  phoenix     => $phoenix,
-);
+for my $animal_data (
+  @Farm::animals,
+  @Outback::animals,
+  @Savanna::animals,
+  @Northern::animals,
+  @Polar::animals,
+  @Jungle::animals,
+  @Jurassic::animals,
+  @Ice_Age::animals,
+  @City::animals,
+  @Mountain::animals,
+  @Moon::animals,
+  @Mars::animals,
+) {
+  $animal{$animal_data->[0]} = $animal_data->[1];
+}
 
 
 croak 'No animals listed!' if @ARGV == 0;

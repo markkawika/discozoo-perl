@@ -37,19 +37,19 @@ my $marsmallow_shape = [
   q{X},
 ];
 
-our $rock     = Animal->new('rock',     $rock_shape);
-our $marsmot  = Animal->new('marsmot',  $marsmot_shape);
-our $marsmoset   = Animal->new('marsmoset',   $marsmoset_shape);
-our $rover     = Animal->new('rover',     $rover_shape);
-our $martian   = Animal->new('martian',   $martian_shape);
+our $rock       = Animal->new('rock',       $rock_shape);
+our $marsmot    = Animal->new('marsmot',    $marsmot_shape);
+our $marsmoset  = Animal->new('marsmoset',  $marsmoset_shape);
+our $rover      = Animal->new('rover',      $rover_shape);
+our $martian    = Animal->new('martian',    $martian_shape);
 our $marsmallow = Animal->new('marsmallow', $marsmallow_shape);
 
 our @animals = (
-  [ 'rock',     $rock     ],
-  [ 'marsmot',  $marsmot  ],
-  [ 'marsmoset',   $marsmoset   ],
-  [ 'rover',     $rover     ],
-  [ 'martian',   $martian   ],
+  [ 'rock',       $rock       ],
+  [ 'marsmot',    $marsmot    ],
+  [ 'marsmoset',  $marsmoset  ],
+  [ 'rover',      $rover      ],
+  [ 'martian',    $martian    ],
   [ 'marsmallow', $marsmallow ],
 );
 

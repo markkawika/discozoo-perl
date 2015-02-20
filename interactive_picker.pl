@@ -105,10 +105,13 @@ for my $animal (@animals) {
 
 my $num_guesses = 0;
 
-printf "There are %d total boards to eliminate.\n", scalar(@boards_left);
-
 while (@boards_left > 0) { 
-  $num_guesses++;
+  if (scalar @boards_left == 1) {
+    print "=== There is now 1 board remaining. ===\n";
+  }
+  else {
+    printf "There are now %d boards remaining.\n", scalar(@boards_left);
+  }
   my $max_score = 0;
 
   # First, identify which spot on the board has the highest chance of
@@ -148,6 +151,18 @@ while (@boards_left > 0) {
     $current_board->printBoard();
     print "\n";
     exit 0;
+  }
+
+  if ($num_guesses++ == 10) {
+    printf "\nOut of guesses. Continue? [y/N] ";
+    my $reply = <STDIN>;
+    chomp $reply;
+    if ($reply !~ /^y/i) {
+      print "\nFinal board:\n\n";
+      $current_board->printBoard();
+      print "\n";
+      exit 0;
+    }
   }
 
   # 'X' marks the spot we want the user to reveal.
@@ -203,22 +218,5 @@ while (@boards_left > 0) {
     }
   }
   @boards_left = @boards_temp;
-  if (scalar @boards_left == 1) {
-    print "\nThere is now 1 board remaining.\n";
-  }
-  else {
-    printf "\nThere are now %d boards remaining.\n", scalar(@boards_left);
-  }
-
-  if ($num_guesses == 10) {
-    printf "\nOut of guesses. Continue? [y/N] ";
-    my $reply = <STDIN>;
-    chomp $reply;
-    if ($reply !~ /^y/i) {
-      print "\nFinal board:\n\n";
-      $current_board->printBoard();
-      print "\n";
-      exit 0;
-    }
-  }
+  print "\n";
 }

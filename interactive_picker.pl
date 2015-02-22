@@ -117,6 +117,7 @@ while (@boards_left > 0) {
   # First, identify which spot on the board has the highest chance of
   # containing either the animal we want, or barring that (if we've already
   # found the animal we want, for example), any animal.
+  my @best_choices = ();
   my $max_x = -1;
   my $max_y = -1;
   for my $y (0 .. 4) {
@@ -131,27 +132,24 @@ while (@boards_left > 0) {
       }
       if ($cur_score > $max_score) {
         $max_score = $cur_score;
-        $max_x = $x;
-        $max_y = $y;
+        @best_choices = ();
+        push @best_choices, [ $x, $y ];
       }
       elsif ($cur_score == $max_score && $cur_score > 0) {
-        # Switch coordinates half of the time we find a matching score. This
-        # will have the effect of making the animal discovery a little more
-        # random-appearing, without actually affecting the outcome.
-        if (rand >= 0.2) {
-          $max_x = $x;
-          $max_y = $y;
-        }
+        push @best_choices, [ $x, $y ];
       }
     }
   }
-
-  if ($max_x == -1) {
+  if (@best_choices == 0) {
     printf "\nYou've found every animal. Congratulations! Final board:\n\n";
     $current_board->printBoard();
     print "\n";
     exit 0;
   }
+
+  my $best_choice = int(rand(scalar @best_choices));
+  $max_x = $best_choices[$best_choice]->[0];
+  $max_y = $best_choices[$best_choice]->[1];
 
   if ($num_guesses++ == 10) {
     printf "\nOut of guesses. Continue? [y/N] ";

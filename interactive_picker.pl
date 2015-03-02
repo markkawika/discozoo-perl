@@ -56,12 +56,10 @@ my %animal_score = ();
 $animal_score{empty} = 0;
 my %animal_count = ();
 $animal_count{empty} = 0;
-my $max_name_len = 0;
 
 for my $i (0 .. $#ARGV) {
   my $animal_name = $ARGV[$i];
   my $name_len = length $animal_name;
-  $max_name_len = ($name_len > $max_name_len) ? $name_len : $max_name_len;
   if (exists $animal{$animal_name}) {
     push @animals, $animal{$animal_name};
     $num_animals = $current_board->addOccupant($animal_name);
@@ -165,6 +163,7 @@ while (@boards_left > 0) {
 
   # 'X' marks the spot we want the user to reveal.
   $current_board->setBoardPos($max_x, $max_y, 'X'); 
+  print "\n";
   $current_board->printBoard();
 
   # Calculate statistics about all possibilities.
@@ -188,9 +187,11 @@ while (@boards_left > 0) {
         { $animal_score{$a} <=> $animal_score{$b} }
         keys %animal_count
   ) {
-    printf "[%${max_name_len}s:%.1f%%] ",
-      ${animal_name},
-      (100.0 * $animal_count{$animal_name}) / @boards_left;
+    my $chance = (1.0 * $animal_count{$animal_name}) / @boards_left;
+    my $line_length = 10;
+    printf "[%-${line_length}s] (%3.2f%%) ${animal_name}\n"
+      , q{=} x int(${line_length} * $chance)
+      , (100.0 * $chance);
   }
   print "\n";
 
